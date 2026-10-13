@@ -1933,3 +1933,42 @@ html.js-reveal .section-divider img.reveal--wipe.is-visible {
     }
     html.js-reveal .section-divider img.reveal--wipe { transform: translate(-50%, -50%) !important; }
 }
+
+/* =========================================================
+   Acento beige (tono de los trajes de los padrinos)
+   ========================================================= */
+:root {
+    --beige: #D8C3AE;
+    --beige-light: #EADBCB;
+    --beige-cream: #F8F2EB;
+}
+html, body { background-color: var(--beige-cream) !important; }
+.content > section:nth-of-type(odd),
+.guest-section { background-color: var(--beige-cream) !important; }
+
+/* Detalles beige sobre azul marino */
+.hero-amp { color: var(--beige); }
+.hero-verse-ref { color: var(--beige-light); }
+.content > section:nth-of-type(even) .event-title::before,
+.content > section:nth-of-type(even) .event-title::after { background: var(--beige); }
+.countdown-item::after { background-color: var(--beige) !important; }
+
+/* Botones claros (sobre azul marino) en beige */
+.btn-wedding,
+.rsvp-container button {
+    background: linear-gradient(90deg, #CDB59C 0%, #EADBCB 100%) !important;
+    color: #152A4A !important;
+    box-shadow: 0 4px 18px -6px rgba(140, 110, 80, 0.35) !important;
+}
+.btn-wedding:hover,
+.rsvp-container button:hover { box-shadow: 0 8px 28px -8px rgba(216, 195, 174, 0.7) !important; }
+
+/* Icono de WhatsApp más pequeño, con borde beige */
+.rsvp-container .whatsapp-icon {
+    width: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: .55rem !important;
+    border-color: var(--beige) !important;
+    background-color: rgba(216, 195, 174, 0.12) !important;
+}
+.rsvp-container .whatsapp-img { width: 100%; height: 100%; }
