@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://www.youtube.com">
     <link rel="preconnect" href="https://www.google.com">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CCSB.css?v=28">
+    <link rel="stylesheet" href="CCSB.css?v=29">
         <style>
         /* Carrusel: 3 imágenes simultáneamente con foto central destacada */
         .carousel-track-container {
@@ -229,7 +229,7 @@
             <div class="hero-overlay"></div>
             <div class="hero-names">
                 <h1 class="hero-couple">Manuel <span class="hero-amp">&amp;</span> Margaret</h1>
-                <p class="hero-verse">“Mejores son dos que uno; porque tienen mejor paga de su trabajo. Porque si cayeren, el uno levantará a su compañero.”</p>
+                <p class="hero-verse">“Mejores son dos que uno; porque si cayeren, el uno levantará a su compañero. Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto.”</p>
                 <p class="hero-verse-ref">Eclesiastés 4:9-12</p>
             </div>
             <div class="top-garland">
@@ -533,11 +533,31 @@
                 <h2 class="modal-title-dark">Código de Vestimenta</h2>
                 <p class="modal-text-dark">Vestimenta formal.</p>
                 <p class="modal-text-dark">Vestido y traje.</p>
-                <p class="modal-text-dark">Agradecemos evitar los colores blanco, azul claro y azul.</p>
+                <p class="modal-text-dark">Agradecemos evitar los colores blanco, beige, azul claro y azul.</p>
                 <div class="dresscode-colors">
                     <span class="color-dot-wrap"><span class="color-dot" style="background:#ffffff;" title="No blanco"></span><small>Blanco</small></span>
+                    <span class="color-dot-wrap"><span class="color-dot" style="background:#D8C3AE;" title="No beige"></span><small>Beige</small></span>
                     <span class="color-dot-wrap"><span class="color-dot" style="background:#A9CBEA;" title="No azul claro"></span><small>Azul claro</small></span>
                     <span class="color-dot-wrap"><span class="color-dot" style="background:#2F5DA8;" title="No azul"></span><small>Azul</small></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Confirmar asistencia (dos opciones de WhatsApp) -->
+        <div id="rsvpModal" class="modal-overlay" onclick="closeRsvpModal(event)">
+            <div class="dresscode-modal" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeRsvpModal()" aria-label="Cerrar">&times;</button>
+                <h2 class="modal-title-dark">Confirmar Asistencia</h2>
+                <p class="modal-text-dark">¿Con quién deseas confirmar?</p>
+                <div class="rsvp-options">
+                    <button type="button" class="rsvp-option" onclick="confirmWith('manuel')">
+                        <img src="whatsapp-azul.png" alt="" aria-hidden="true">
+                        <span>Confirmar con <strong>Manuel</strong></span>
+                    </button>
+                    <button type="button" class="rsvp-option" onclick="confirmWith('margaret')">
+                        <img src="whatsapp-azul.png" alt="" aria-hidden="true">
+                        <span>Confirmar con <strong>Margaret</strong></span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -583,6 +603,6 @@
             } catch(e) {}
         })();
         </script>
-        <script src="JAVAB.js?v=27" defer></script>
+        <script src="JAVAB.js?v=29" defer></script>
 </body>
 </html>

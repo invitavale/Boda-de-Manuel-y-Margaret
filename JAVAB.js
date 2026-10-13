@@ -562,11 +562,28 @@ function closeGiftModal(event) {
     }
 }
 
-const WHATSAPP_NUMBER = '18297578864';
+const WHATSAPP_CONTACTS = {
+    manuel:   '18297578864',
+    margaret: '18498173839'
+};
 const WHATSAPP_MESSAGE = 'Confirmo mi asistencia a la boda de Manuel & Margaret';
 
+// El botón "Confirmar por WhatsApp" abre las dos opciones
 function confirmAttendance() {
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MESSAGE);
+    const modal = document.getElementById('rsvpModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeRsvpModal() {
+    const modal = document.getElementById('rsvpModal');
+    if (modal) modal.style.display = 'none';
+}
+
+function confirmWith(who) {
+    const number = WHATSAPP_CONTACTS[who];
+    if (!number) return;
+    const url = 'https://wa.me/' + number + '?text=' + encodeURIComponent(WHATSAPP_MESSAGE);
+    closeRsvpModal();
     const win = window.open(url, '_blank');
     if (win) { win.opener = null; } else { window.location.href = url; }
 }
