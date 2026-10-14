@@ -1986,3 +1986,12 @@ html, body { background-color: var(--beige-cream) !important; }
 .rsvp-option:hover { transform: translateY(-1px); box-shadow: 0 8px 28px -8px rgba(216, 195, 174, 0.7); }
 .rsvp-option img { width: 38px; height: 38px; object-fit: contain; flex: none; }
 .rsvp-option strong { font-weight: 700; }
+.guest-name.guest-extra { font-style: italic; }
+.guest-pases {
+    margin-top: 1.1rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: hsl(var(--foreground));
+    opacity: .85;
+}
