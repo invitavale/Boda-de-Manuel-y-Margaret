@@ -631,9 +631,16 @@ function showToast(title, message) {
 //   ?invitados=Juan Arias,Yerianny Arias,Valery Arias
 //   ?familia=Arias
 function initializeGuestGreeting() {
+    // Parámetros del enlace personalizado:
+    //   invitados = nombres separados por coma        (ej. Ruben Aride,Ersi Xiomara)
+    //   acomp     = acompañantes sin nombre            (ej. 4  -> "+ 4 acompañantes")
+    //   familia   = apellido de la familia             (ej. Díaz Beltré -> "Familia Díaz Beltré")
+    //   rep       = cantidad de representantes         (ej. 9  -> "9 representantes")
     const params = new URLSearchParams(window.location.search);
     const invitadosParam = params.get('invitados');
-    const familiaParam = params.get('familia');
+    const familiaParam = (params.get('familia') || '').trim();
+    const acomp = Math.max(0, parseInt(params.get('acomp'), 10) || 0);
+    const rep = Math.max(0, parseInt(params.get('rep'), 10) || 0);
 
     const section = document.getElementById('guestSection');
     const badge = document.getElementById('guestBadge');
@@ -642,40 +649,44 @@ function initializeGuestGreeting() {
     if (!section || !badge || !subtitle || !greeting) return;
 
     let names = [];
-
     if (invitadosParam) {
         // URLSearchParams ya decodifica: un segundo decodeURIComponent rompía
         // la página si un nombre traía el signo %
         names = invitadosParam.split(',').map(n => n.trim()).filter(Boolean);
     } else if (familiaParam) {
-        names = [`Familia ${familiaParam.trim()}`];
+        names = [`Familia ${familiaParam}`];
     }
-
     if (names.length === 0) return;
 
-    // Badge con el total de invitados
-    badge.textContent = names.length;
+    // Total de pases: representantes, o nombres + acompañantes
+    badge.textContent = rep > 0 ? rep : names.length + acomp;
 
-    // Subtítulo de acompañantes: solo tiene sentido cuando hay más de un
-    // nombre individual (no aplica al formato "Familia X")
-    const companions = invitadosParam ? names.length - 1 : 0;
-    if (companions > 0) {
-        subtitle.textContent = `(${companions} acompañante${companions > 1 ? 's' : ''})`;
+    // Subtítulo: nombre de la familia (si vino junto a los nombres) o representantes
+    const sub = [];
+    if (invitadosParam && familiaParam) sub.push(`Familia ${familiaParam}`);
+    if (rep > 0) sub.push(`${rep} representante${rep > 1 ? 's' : ''}`);
+    if (sub.length) {
+        subtitle.textContent = sub.join(' · ');
         subtitle.style.display = 'block';
     } else {
         subtitle.style.display = 'none';
     }
 
-    // Limpiar contenido previo
     greeting.innerHTML = '';
-
     names.forEach((name, index) => {
         const nameSpan = document.createElement('span');
-        const colorIndex = (index % 4) + 1;
-        nameSpan.className = `guest-name color-${colorIndex}`;
+        nameSpan.className = `guest-name color-${(index % 4) + 1}`;
         nameSpan.textContent = name;
         greeting.appendChild(nameSpan);
     });
+
+    // Acompañantes sin nombre: "+ 4 acompañantes"
+    if (acomp > 0) {
+        const extra = document.createElement('span');
+        extra.className = `guest-name guest-extra color-${(names.length % 4) + 1}`;
+        extra.textContent = `+ ${acomp} acompañante${acomp > 1 ? 's' : ''}`;
+        greeting.appendChild(extra);
+    }
 
     section.style.display = 'block';
 }
